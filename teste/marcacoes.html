@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Marque o seu serviço online - Oficina sus">
+  <title>Marcações | Oficina sus - Agendamento Online</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .calendar-day {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .calendar-day:hover {
+      background-color: #f0f0f0;
+    }
+    .calendar-day.selected {
+      background-color: var(--brand);
+      color: white;
+    }
+    .calendar-day.disabled {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+    .time-slot {
+      padding: 0.5rem 1rem;
+      border: 2px solid #e9ecef;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .time-slot:hover {
+      border-color: var(--brand-light);
+    }
+    .time-slot.selected {
+      background-color: var(--brand);
+      color: white;
+      border-color: var(--brand);
+    }
+    .time-slot.disabled {
+      background-color: #f8f9fa;
+      color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="imgs/logo.png" alt="Logo Oficina sus" width="40" height="40" class="d-inline-block me-2">
+        <div>
+          <span class="fw-bold">Oficina sus</span>
+          <small class="d-block text-brand-light" style="font-size: 0.7rem; line-height: 1;">O único 'sus' aqui é a nossa qualidade</small>
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html"><i class="bi bi-house-door me-1"></i>Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="servicos.html"><i class="bi bi-tools me-1"></i>Serviços</a></li>
+          <li class="nav-item"><a class="nav-link active" href="marcacoes.html"><i class="bi bi-calendar-check me-1"></i>Marcações</a></li>
+          <li class="nav-item"><a class="nav-link" href="contactos.html"><i class="bi bi-telephone me-1"></i>Contactos</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="py-5 bg-dark text-light">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h1 class="display-5 fw-bold mb-3 text-white">Marcações Online</h1>
+          <p class="lead mb-4">Agende o seu serviço de forma rápida e conveniente. Escolha a data e hora que melhor lhe convém.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <span class="badge bg-brand p-2"><i class="bi bi-clock me-1"></i>Confirmação Imediata</span>
+            <span class="badge bg-brand p-2"><i class="bi bi-bell me-1"></i>Lembretes por SMS</span>
+            <span class="badge bg-brand p-2"><i class="bi bi-x-circle me-1"></i>Cancelamento Gratuito</span>
+          </div>
+        </div>
+        <div class="col-lg-4 text-center mt-4 mt-lg-0">
+          <i class="bi bi-calendar2-check display-1 text-brand"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card border-0 shadow">
+            <div class="card-body p-4 p-md-5">
+              <div class="row">
+                <!-- Passos do Processo -->
+                <div class="col-lg-3 mb-4 mb-lg-0">
+                  <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action active d-flex align-items-center">
+                      <span class="badge bg-white text-brand me-2">1</span>
+                      <span>Serviço</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+                      <span class="badge bg-light text-muted me-2">2</span>
+                      <span>Data e Hora</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+                      <span class="badge bg-light text-muted me-2">3</span>
+                      <span>Dados Pessoais</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
+                      <span class="badge bg-light text-muted me-2">4</span>
+                      <span>Confirmação</span>
+                    </a>
+                  </div>
+                  
+                  <div class="mt-4 p-3 bg-light rounded">
+                    <h6 class="fw-bold"><i class="bi bi-info-circle me-2"></i>Informação</h6>
+                    <p class="small mb-2">• Cancelamentos até 24h antes</p>
+                    <p class="small mb-2">• Chegar 10 minutos antes</p>
+                    <p class="small">• Trazer documentação do veículo</p>
+                  </div>
+                </div>
+
+                <!-- Formulário de Marcação -->
+                <div class="col-lg-9">
+                  <h3 class="fw-bold mb-4">Selecione o Serviço</h3>
+                  
+                  <!-- Seleção de Serviço -->
+                  <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                      <div class="form-check card p-3">
+                        <input class="form-check-input" type="radio" name="servico" id="revisao" checked>
+                        <label class="form-check-label" for="revisao">
+                          <h6 class="fw-bold mb-1">Revisão Programada</h6>
+                          <p class="small text-muted mb-0">Manutenção preventiva completa</p>
+                          <span class="badge bg-brand mt-2"> > €120</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-check card p-3">
+                        <input class="form-check-input" type="radio" name="servico" id="diagnostico">
+                        <label class="form-check-label" for="diagnostico">
+                          <h6 class="fw-bold mb-1">Diagnóstico</h6>
+                          <p class="small text-muted mb-0">Identificação de problemas</p>
+                          <span class="badge bg-brand mt-2">€45</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-check card p-3">
+                        <input class="form-check-input" type="radio" name="servico" id="trocaOleo">
+                        <label class="form-check-label" for="trocaOleo">
+                          <h6 class="fw-bold mb-1">Troca de Óleo</h6>
+                          <p class="small text-muted mb-0">Óleo e filtros</p>
+                          <span class="badge bg-brand mt-2"> > €65</span>
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-check card p-3">
+                        <input class="form-check-input" type="radio" name="servico" id="travagem">
+                        <label class="form-check-label" for="travagem">
+                          <h6 class="fw-bold mb-1">Sistema de Travagem</h6>
+                          <p class="small text-muted mb-0">Pastilhas, discos e líquido</p>
+                          <span class="badge bg-brand mt-2">Orçamento</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Calendário -->
+                  <h4 class="fw-bold mb-3">Escolha a Data</h4>
+                  <div class="card mb-4">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="fw-bold mb-0">Dezembro 2023</h5>
+                        <div>
+                          <button class="btn btn-sm btn-outline-brand me-2"><i class="bi bi-chevron-left"></i></button>
+                          <button class="btn btn-sm btn-outline-brand"><i class="bi bi-chevron-right"></i></button>
+                        </div>
+                      </div>
+                      
+                      <div class="row text-center mb-2">
+                        <div class="col p-2 fw-bold">Dom</div>
+                        <div class="col p-2 fw-bold">Seg</div>
+                        <div class="col p-2 fw-bold">Ter</div>
+                        <div class="col p-2 fw-bold">Qua</div>
+                        <div class="col p-2 fw-bold">Qui</div>
+                        <div class="col p-2 fw-bold">Sex</div>
+                        <div class="col p-2 fw-bold">Sáb</div>
+                      </div>
+                      
+                      <div class="row text-center" id="calendario">
+                        <!-- Dias serão gerados por JavaScript -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Horários -->
+                  <h4 class="fw-bold mb-3">Horário Disponível</h4>
+                  <div class="mb-4">
+                    <div class="row g-2" id="horarios">
+                      <!-- Horários serão gerados por JavaScript -->
+                    </div>
+                    <p class="text-muted small mt-2"><i class="bi bi-info-circle me-1"></i> Cada marcação tem duração de aproximadamente 1 hora.</p>
+                  </div>
+
+                  <!-- Informações do Veículo -->
+                  <h4 class="fw-bold mb-3">Informações do Veículo</h4>
+                  <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Marca *</label>
+                      <select class="form-select" required>
+                        <option selected disabled>Selecione a marca</option>
+                        <option>Volkswagen</option>
+                        <option>BMW</option>
+                        <option>Mercedes-Benz</option>
+                        <option>Audi</option>
+                        <option>Ford</option>
+                        <option>Peugeot</option>
+                        <option>Renault</option>
+                        <option>Outra</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Modelo *</label>
+                      <input type="text" class="form-control" placeholder="Ex: Golf 1.6 TDI" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Ano *</label>
+                      <input type="number" class="form-control" min="1990" max="2023" value="2018" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Matrícula *</label>
+                      <input type="text" class="form-control" placeholder="Ex: AA-00-00" required>
+                    </div>
+                  </div>
+
+                  <!-- Dados Pessoais -->
+                  <h4 class="fw-bold mb-3">Dados Pessoais</h4>
+                  <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Nome Completo *</label>
+                      <input type="text" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Telefone *</label>
+                      <input type="tel" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Email *</label>
+                      <input type="email" class="form-control" required>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">NIF (opcional)</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+
+                  <!-- Observações -->
+                  <div class="mb-4">
+                    <label class="form-label fw-bold">Observações</label>
+                    <textarea class="form-control" rows="3" placeholder="Descreva algum problema específico ou informação adicional..."></textarea>
+                  </div>
+
+                  <!-- Confirmação -->
+                  <div class="form-check mb-4">
+                    <input class="form-check-input" type="checkbox" id="confirmacao" required>
+                    <label class="form-check-label" for="confirmacao">
+                      Confirmo que li e aceito os <a href="#">termos e condições</a> *
+                    </label>
+                  </div>
+
+                  <!-- Botão de Submissão -->
+                  <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-outline-secondary">
+                      <i class="bi bi-arrow-left me-2"></i>Voltar
+                    </button>
+                    <button type="submit" class="btn btn-brand px-4">
+                      Confirmar Marcação<i class="bi bi-arrow-right ms-2"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Informações Adicionais -->
+          <div class="row mt-4 g-4">
+            <div class="col-md-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                  <i class="bi bi-shield-check text-brand fs-1 mb-3"></i>
+                  <h5 class="fw-bold">Marcação Segura</h5>
+                  <p class="text-muted">Seus dados estão protegidos e não são partilhados com terceiros.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                  <i class="bi bi-clock-history text-brand fs-1 mb-3"></i>
+                  <h5 class="fw-bold">Lembretes</h5>
+                  <p class="text-muted">Recebe SMS e email de confirmação e lembrete 24h antes.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center p-4">
+                  <i class="bi bi-telephone text-brand fs-1 mb-3"></i>
+                  <h5 class="fw-bold">Suporte</h5>
+                  <p class="text-muted">Precisa de ajuda? Ligue para +351 123 456 789</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h5 class="fw-bold mb-3">Oficina sus</h5>
+          <p class="text-light" style="opacity: 0.8;">Especialistas em mecânica automóvel com mais de 15 anos de experiência. Qualidade e transparência em cada serviço.</p>
+          <div class="d-flex gap-3">
+            <a href="#" class="text-light fs-5"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-light fs-5"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-light fs-5"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h5 class="fw-bold mb-3">Contactos Rápidos</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="bi bi-telephone me-2"></i>+351 123 456 789</li>
+            <li class="mb-2"><i class="bi bi-whatsapp me-2"></i>+351 912 345 678</li>
+            <li class="mb-2"><i class="bi bi-envelope me-2"></i>geral@oficinasus.pt</li>
+            <li><i class="bi bi-geo-alt me-2"></i>Rua das Oficinas, 123, Lisboa</li>
+          </ul>
+        </div>
+        <div class="col-lg-4">
+          <h5 class="fw-bold mb-3">Horário</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2">Segunda - Sexta: 08:30 - 19:00</li>
+            <li class="mb-2">Sábado: 09:00 - 13:00</li>
+            <li>Domingo: Encerrado</li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4" style="opacity: 0.1;">
+      <div class="text-center">
+        <p class="mb-0">&copy; <span id="ano3"></span> Oficina sus. Todos os direitos reservados.</p>
+        <p class="small mt-2" style="opacity: 0.6;">NIF: 123 456 789 | Licença: XYZ-12345-ABC</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Ano atual
+    document.getElementById('ano3').textContent = new Date().getFullYear();
+
+    // Calendário simples
+    const calendario = document.getElementById('calendario');
+    const horarios = document.getElementById('horarios');
+    
+    // Gerar dias do calendário (exemplo simplificado)
+    function gerarCalendario() {
+      const dias = [];
+      // Dias do mês anterior (cinza)
+      for (let i = 26; i <= 30; i++) {
+        dias.push(`<div class="col p-2"><div class="calendar-day disabled">${i}</div></div>`);
+      }
+      // Dias do mês atual
+      for (let i = 1; i <= 31; i++) {
+        const hoje = i === 15 ? 'selected' : '';
+        dias.push(`<div class="col p-2"><div class="calendar-day ${hoje}">${i}</div></div>`);
+      }
+      calendario.innerHTML = dias.join('');
+      
+      // Adicionar eventos aos dias
+      document.querySelectorAll('.calendar-day:not(.disabled)').forEach(day => {
+        day.addEventListener('click', function() {
+          document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+          this.classList.add('selected');
+          gerarHorarios();
+        });
+      });
+    }
+    
+    // Gerar horários
+    function gerarHorarios() {
+      const slots = [
+        '09:00', '10:00', '11:00', '12:00',
+        '14:00', '15:00', '16:00', '17:00'
+      ];
+      
+      let html = '';
+      slots.forEach(slot => {
+        const disabled = Math.random() > 0.7 ? 'disabled' : '';
+        html += `
+          <div class="col-6 col-md-3">
+            <div class="time-slot ${disabled}">${slot}</div>
+          </div>
+        `;
+      });
+      
+      horarios.innerHTML = html;
+      
+      // Adicionar eventos aos horários
+      document.querySelectorAll('.time-slot:not(.disabled)').forEach(slot => {
+        slot.addEventListener('click', function() {
+          document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+          this.classList.add('selected');
+        });
+      });
+    }
+    
+    // Inicializar
+    gerarCalendario();
+    gerarHorarios();
+    
+    // Validação do formulário
+    document.querySelector('button[type="submit"]').addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const servicoSelecionado = document.querySelector('input[name="servico"]:checked');
+      const diaSelecionado = document.querySelector('.calendar-day.selected');
+      const horaSelecionada = document.querySelector('.time-slot.selected');
+      
+      if (!servicoSelecionado || !diaSelecionado || !horaSelecionada) {
+        alert('Por favor, selecione um serviço, data e horário.');
+        return;
+      }
+      
+      if (!document.getElementById('confirmacao').checked) {
+        alert('Por favor, aceite os termos e condições.');
+        return;
+      }
+      
+      // Simulação de envio bem-sucedido
+      alert('Marcaçao confirmada! Receberá um email de confirmação em breve.');
+    });
+  </script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
